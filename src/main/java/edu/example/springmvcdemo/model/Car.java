@@ -1,23 +1,23 @@
 package edu.example.springmvcdemo.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import edu.example.springmvcdemo.util.Model;
+import edu.example.springmvcdemo.validation.constraints.CarConstraint;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 @Data
+@CarConstraint
 public class Car {
     private Long id;
-    private LocalDateTime created;
-    private LocalDateTime destroyed;
 
+    @Min(value = 0, message = "Машина не может стоить меньше 0 рублей")
+    @Max(value = 20000, message = "Машина не может стоить дороже 20 000 рублей")
+    private Long price;
+
+    @Size(max = 50, message = "слишком длинное имя для цвета")
     private String color;
 
-    private Model model;
+
+    private String model;
 }

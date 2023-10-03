@@ -18,7 +18,7 @@ public class CarController {
 
     @PostMapping
     @Operation(description = "Создание машины")
-    public String create(@RequestBody Car car) {
+    public String create(@RequestBody @Valid Car car) {
         car.setId(++idIncrementor);
         cars.add(car);
         return "car was ceated: ".concat(car.toString());
